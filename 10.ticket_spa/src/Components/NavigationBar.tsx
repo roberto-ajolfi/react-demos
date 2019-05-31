@@ -24,7 +24,7 @@ export default class NavigationBar extends Component<any, any> {
   render() {
     return (
         <header>
-            <Navbar className="navbar-dark navbar-expand-sm navbar-toggleable-sm bg-dark ng-white border-bottom box-shadow mb-3" light>
+            <Navbar dark className="navbar-expand-sm navbar-toggleable-sm bg-dark ng-white border-bottom box-shadow mb-3" light>
                 <Container>
                     <NavbarBrand tag={RRNL} to="/"><img src="images/logo.jpg" />&nbsp;Help Desk System</NavbarBrand>
                     <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />

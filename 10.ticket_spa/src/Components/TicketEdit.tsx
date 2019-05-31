@@ -92,7 +92,7 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
         <Container>
           <Row>
               <Col>
-                <h1>Open New Ticket</h1>
+                <h1>Edit Ticket #{this.state.id}</h1>
               </Col>
           </Row>
           <Row>

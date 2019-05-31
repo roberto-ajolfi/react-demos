@@ -1,1 +1,1 @@
-declare module 'simple-react-validator/dist/simple-react-validator'
+declare module 'simple-react-validator/dist/simple-react-validator.min.js'

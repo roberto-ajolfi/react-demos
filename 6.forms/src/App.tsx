@@ -4,6 +4,7 @@ import './App.css';
 import Form from './Form';
 import UncontrolledForm from './UncontrolledForm';
 import ValidateForm from './ValidateForm';
+import SimpleValidationForm from './SimpleValidationForm';
 
 class App extends Component {
   render() {
@@ -12,7 +13,8 @@ class App extends Component {
         <header className="App-header">
           {/* <Form></Form> */}
           {/* <UncontrolledForm></UncontrolledForm> */}
-          <ValidateForm></ValidateForm>
+          {/* <ValidateForm></ValidateForm> */}
+          <SimpleValidationForm></SimpleValidationForm>
         </header>
       </div>
     );
