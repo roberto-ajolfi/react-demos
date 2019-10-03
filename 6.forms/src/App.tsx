@@ -11,10 +11,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          {/* <Form></Form> */}
+          <Form></Form>
           {/* <UncontrolledForm></UncontrolledForm> */}
           {/* <ValidateForm></ValidateForm> */}
-          <SimpleValidationForm></SimpleValidationForm>
+          {/* <SimpleValidationForm></SimpleValidationForm> */}
         </header>
       </div>
     );
