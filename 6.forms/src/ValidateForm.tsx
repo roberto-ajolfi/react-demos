@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 
 export default class ValidateForm extends Component<any, any> {
     constructor(props: any) {
         super(props);
 
-        this.state = { name: '', role: '' };
+        this.state = { 
+            name: '', 
+            role: '', 
+            date: moment().format("YYYY-MM-DD") 
+        };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -32,6 +37,7 @@ export default class ValidateForm extends Component<any, any> {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
+                <h2>Validate Form</h2>
                 <div className="form-group row">
                     <label htmlFor="name">Name</label>
                     <input className="form-control" type="text" name="name" 
@@ -46,6 +52,11 @@ export default class ValidateForm extends Component<any, any> {
                         <option value="user">Regular User</option>
                         <option value="guest">Guest User</option>
                     </select>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="date">Date</label>
+                    <input className="form-control" type="date" name="date" 
+                        value={this.state.date} onChange={this.handleChange}/> 
                 </div>
                 <div className="form-group row">
                     <input className="btn btn-primary" type="submit" value="Submit" /> 

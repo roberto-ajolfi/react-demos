@@ -1,23 +1,54 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 
-export default class Form extends Component<any, any> {
+export default class WebApiForm extends Component<any, any> {
     constructor(props: any) {
         super(props);
 
         this.state = { 
             name: '', 
             role: 'na', 
-            date: moment().format("YYYY-MM-DD") 
+            date: moment().format("YYYY-MM-DD"),
+            state: '',
+            states: []
         };
         
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
+    apiURL: string = "https://localhost:44328/api/state";
+    async getState() {
+        try {
+            var promise = await fetch(this.apiURL, {
+                headers: new Headers({
+                  "Authorization": "Basic " + btoa("guest1:Gu&st!")
+                })
+            });
+
+            const data = await promise.json();
+            return data;
+        } catch(err) {
+            return [];
+        }
+    }
+
+    componentDidMount() {
+        this.getState()
+        .then(
+            (data:any) => {
+                this.setState( { states: data } )
+            },
+            (err:any) => {
+                this.setState( { states: []} )
+            }
+        );
+    }
+
     handleSubmit(event: any) {
         alert('Submitted: on ' + this.state.date + " " +
-            this.state.name + ' is a ' + this.state.role);
+            this.state.name + ' is a ' + this.state.role +
+            " (State: " + this.state.state + ")");
         event.preventDefault();
     }
 
@@ -36,6 +67,17 @@ export default class Form extends Component<any, any> {
       }
 
     render() {
+        const stateOptions = (<React.Fragment>
+            { this.state.states.map(
+                (item: {id: number, description: string}) => 
+                    <option key={item.id} value={item.id}>{item.description}</option>
+            )}
+        </React.Fragment>);
+        const pippo = this.state.states.map(
+            (item: {id: number, description: string}) => 
+                <option value={item.id}>{item.description}</option>
+        );
+        
         return (
             <form onSubmit={this.handleSubmit}>
                 <h2>Regular Form</h2>
@@ -52,6 +94,14 @@ export default class Form extends Component<any, any> {
                         <option value="admin">Administrator</option>
                         <option value="user">Regular User</option>
                         <option value="guest">Guest User</option>
+                    </select> 
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="state">State</label>
+                    <select className="form-control" name="state" 
+                        value={this.state.state} onChange={this.handleChange}>
+                        <option value="na">-- Select a State --</option>
+                        {stateOptions}
                     </select> 
                 </div>
                 <div className="form-group row">

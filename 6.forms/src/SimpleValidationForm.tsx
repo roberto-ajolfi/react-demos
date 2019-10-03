@@ -1,5 +1,6 @@
 import React, { Component, ChangeEvent } from "react";
 import SimpleReactValidator from 'simple-react-validator/dist/simple-react-validator.min.js';
+import moment from 'moment'
 
 export default class SimpleForm extends Component<any, any> {
     validator: any;
@@ -10,7 +11,8 @@ export default class SimpleForm extends Component<any, any> {
         this.state ={
             firstName: '',
             lastName: '',
-            role: 'admin'
+            role: 'admin',
+            date: moment().format("YYYY-MM-DD")
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,6 +49,7 @@ export default class SimpleForm extends Component<any, any> {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
+                <h2>SimpleValidation Form</h2>
                 <div className="form-group row">
                     <label htmlFor="firstName">First Name</label>
                     <input className="form-control" type="text" name="firstName"
@@ -62,11 +65,17 @@ export default class SimpleForm extends Component<any, any> {
                     <label htmlFor="role">Role</label>
                     <select className="form-control" name="role" 
                         value={this.state.role} onChange={this.handleChange}>
-                        <option value="na">-- Select a Role --</option>
+                        <option value="">-- Select a Role --</option>
                         <option value="admin">Administrator</option>
                         <option value="user">Regular User</option>
                         <option value="guest">Guest User</option>
                     </select> 
+                    {this.validator.message('Role', this.state.role, 'required')}
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="date">Date</label>
+                    <input className="form-control" type="date" name="date" 
+                        value={this.state.date} onChange={this.handleChange}/> 
                 </div>
                 <div className="form-group row">
                     <input className="btn btn-primary" type="submit" 
