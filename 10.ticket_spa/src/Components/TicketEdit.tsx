@@ -155,8 +155,8 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
                   value={this.state.state} onChange={this.handleChange}>
                   <option value="">-- Select a State --</option>
                   <option value="New">New</option>
-                  <option value="Processing">On Going</option>
-                  <option value="Closed">Closed</option>
+                  <option value="OnGoing">On Going</option>
+                  <option value="Close">Close</option>
               </select>
             </Col>
           </Row>
