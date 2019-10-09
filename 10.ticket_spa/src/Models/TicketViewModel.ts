@@ -1,4 +1,4 @@
-export default class Ticket {
+export default class TicketView {
     constructor(
         public id: number,
         public issueDate: Date,

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Ticket from '../Models/Ticket';
+import TicketView from '../Models/TicketViewModel';
 import TicketDataService from '../Services/TicketDataService';
 import { RouteComponentProps, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 
 interface TicketListState {
-    tickets: Ticket[];
+    tickets: TicketView[];
     loading: boolean;
 }
 
@@ -36,7 +36,7 @@ export default class TicketList extends Component<RouteComponentProps<{}>, Ticke
         const { match } = this.props;
         const { tickets, loading } = this.state;
 
-        let ticketData = tickets.map((item: Ticket) => (
+        let ticketData = tickets.map((item: TicketView) => (
             <tr key={item.id}>
                 <td>{new Date(item.issueDate).toISOString().slice(0,10)}</td>
                 <td>{item.priority}</td>

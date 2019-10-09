@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { RouteComponentProps, Link, Redirect } from 'react-router-dom';
-import Ticket from '../Models/Ticket';
+import Ticket from '../Models/TicketViewModel';
 import TicketDataService from '../Services/TicketDataService';
 import { Container, Row, Col } from 'reactstrap';
 import '../index.css';

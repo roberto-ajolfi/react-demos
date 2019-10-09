@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import { Link, Redirect, RouteComponentProps } from 'react-router-dom';
 import TicketDataService from '../Services/TicketDataService';
-import Ticket from '../Models/Ticket';
+import TicketView from '../Models/TicketViewModel';
+import Ticket from '../Models/TicketModel';
 
 interface TicketEditState {
   id: string
   title: string;
   description: string;
   category: string;
-  priority: string;
-  state: string;
+  priority: number;
+  state: number;
   completed: boolean;
 }
 
@@ -18,7 +19,7 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
   constructor(props: any) {
     super(props);
 
-    this.state = { id: '', title: '', description: '', category: '', priority: '', state:'', completed: false };
+    this.state = { id: '', title: '', description: '', category: '', priority: 0, state: 0, completed: false };
     
     this.updateTicket = this.updateTicket.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -35,9 +36,9 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
             id: String(data.id),
             title: data.title,
             description: data.description,
-            category: data.category,
-            priority: data.priority,
-            state: data.state
+            category: String(data.categoryId),
+            priority: data.priorityId,
+            state: data.stateId
            });
       },
       (error: any) => {
@@ -53,11 +54,11 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
     const ticketToEdit = new Ticket(
       Number(this.state.id),
       new Date(),
-      this.state.category,
+      Number(this.state.category),
       this.state.title,
       this.state.description,
-      this.state.priority,
-      this.state.state
+      Number(this.state.priority),
+      Number(this.state.state)
     );
 
     service
@@ -125,10 +126,10 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
             <Col className="col-4">
               <select className="form-control" name="category" 
                   value={this.state.category} onChange={this.handleChange}>
-                  <option value="">-- Select a Category --</option>
-                  <option value="Unknown">Unknown</option>
-                  <option value="Development">Development</option>
-                  <option value="System">System</option>
+                  <option value="0">-- Select a Category --</option>
+                  <option value="1">Unknown</option>
+                  <option value="2">Development</option>
+                  <option value="3">System</option>
               </select>
             </Col>
           </Row>
@@ -139,10 +140,10 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
             <Col className="col-4">
               <select className="form-control" name="priority" 
                   value={this.state.priority} onChange={this.handleChange}>
-                  <option value="">-- Select a Priority --</option>
-                  <option value="Low">Low</option>
-                  <option value="Normal">Normal</option>
-                  <option value="High">High</option>
+                  <option value="0">-- Select a Priority --</option>
+                  <option value="1">Low</option>
+                  <option value="2">Normal</option>
+                  <option value="3">High</option>
               </select>
             </Col>
           </Row>
@@ -153,10 +154,10 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
             <Col className="col-4">
               <select className="form-control" name="state" 
                   value={this.state.state} onChange={this.handleChange}>
-                  <option value="">-- Select a State --</option>
-                  <option value="New">New</option>
-                  <option value="OnGoing">On Going</option>
-                  <option value="Close">Close</option>
+                  <option value="0">-- Select a State --</option>
+                  <option value="1">New</option>
+                  <option value="2">On Going</option>
+                  <option value="3">Close</option>
               </select>
             </Col>
           </Row>

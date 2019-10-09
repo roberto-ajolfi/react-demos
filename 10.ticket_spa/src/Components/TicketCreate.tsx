@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import TicketDataService from '../Services/TicketDataService';
-import Ticket from '../Models/Ticket';
+import Ticket from '../Models/TicketModel';
 
 interface TicketCreateState {
   title: string;
@@ -30,11 +30,11 @@ export default class TicketCreate extends Component<any, TicketCreateState> {
     const ticketToCreate = new Ticket(
       0,
       new Date(),
-      this.state.category,
+      Number(this.state.category),
       this.state.title,
       this.state.description,
-      this.state.priority,
-      'New'
+      Number(this.state.priority),
+      1     // New (State)
     );
 
     service
@@ -102,10 +102,10 @@ export default class TicketCreate extends Component<any, TicketCreateState> {
             <Col className="col-4">
               <select className="form-control" name="category" 
                   value={this.state.category} onChange={this.handleChange}>
-                  <option value="">-- Select a Category --</option>
-                  <option value="Unknown">Unknown</option>
-                  <option value="Development">Development</option>
-                  <option value="System">System</option>
+                  <option value="0">-- Select a Category --</option>
+                  <option value="1">Unknown</option>
+                  <option value="2">Development</option>
+                  <option value="3">System</option>
               </select>
             </Col>
           </Row>
@@ -116,10 +116,10 @@ export default class TicketCreate extends Component<any, TicketCreateState> {
             <Col className="col-4">
               <select className="form-control" name="priority" 
                   value={this.state.priority} onChange={this.handleChange}>
-                  <option value="">-- Select a Priority --</option>
-                  <option value="Low">Low</option>
-                  <option value="Normal">Normal</option>
-                  <option value="High">High</option>
+                  <option value="0">-- Select a Priority --</option>
+                  <option value="1">Low</option>
+                  <option value="2">Normal</option>
+                  <option value="3">High</option>
               </select>
             </Col>
           </Row>

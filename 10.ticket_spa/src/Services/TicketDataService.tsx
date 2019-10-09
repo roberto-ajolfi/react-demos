@@ -1,7 +1,8 @@
-import Ticket from "../Models/Ticket";
+import TicketView from "../Models/TicketViewModel";
+import Ticket from "../Models/TicketModel";
 
 export default class TicketDataService {
-    //apiURL: string = "https://localhost:44328/api/ticketanon";
+    //apiURL: string = "https://localhost:44328/api/ticket";
     //apiURL: string = "https://icticketing.azurewebsites.net/api/ticketanon";
     apiURL: string = "https://icticketing.azurewebsites.net/api/ticket";
     basicHeaders: Headers = new Headers({
