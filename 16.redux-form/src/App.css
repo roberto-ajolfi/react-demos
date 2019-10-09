@@ -20,3 +20,15 @@
 .App-link {
   color: #09d3ac;
 }
+
+.errorMessage {
+  font-size: 0.8em;
+  color: red;
+  margin-left: 20px;
+}
+
+.warningMessage {
+  font-size: 0.8em;
+  color: gold;
+  margin-left: 20px;
+}

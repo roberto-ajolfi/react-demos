@@ -1,59 +1,43 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, { Component } from 'react';
+import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import { required, maxLength, minLength, minValue, email, alphaNumeric, number, phoneNumber } from './ValidationRules';
 
-//== VALIDATORS =====
-const required = value => (value || typeof value === 'number' ? undefined : 'Required')
-const maxLength = max => value =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15)
-export const minLength = min => value =>
-  value && value.length < min ? `Must be ${min} characters or more` : undefined;
-export const minLength2 = minLength(2)
-const number = value =>
-  value && isNaN(Number(value)) ? 'Must be a number' : undefined;
-const minValue = min => value =>
-  value && value < min ? `Must be at least ${min}` : undefined;
-const minValue13 = minValue(13)
-const email = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email address'
-    : undefined;
-const tooYoung = value =>
-  value && value < 13
-    ? 'You do not meet the minimum age requirement!'
-    : undefined;
-const aol = value =>
-  value && /.+@aol\.com/.test(value)
-    ? 'Really? You still use AOL for your email?'
-    : undefined;
-const alphaNumeric = value =>
-  value && /[^a-zA-Z0-9 ]/i.test(value)
-    ? 'Only alphanumeric characters'
-    : undefined;
-export const phoneNumber = value =>
-  value && !/^(0|[1-9][0-9]{9})$/i.test(value)
-    ? 'Invalid phone number, must be 10 digits'
-    : undefined;
-// == END VALIDATORS =====
+//== LOCAL VALIDATORS =====
+const maxLength15 = maxLength(15);
+const minLength2 = minLength(2);
+const minValue13 = minValue(13);
+// == END LOCAL VALIDATORS =====
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error, warning }
-}) => (
+// form data interface (define the form fields)
+interface IFullFormData {
+  username: string;
+  email: string;
+  age: number;
+  phone: number;
+}
+
+interface IElement {
+  input: any;
+  label: string;
+  type: string;
+  meta: { touched: boolean; error: string; warning: string; }
+}
+const renderField = (item: IElement) => (
   <div>
-    <label>{label}</label>
+    <label>{item.label}</label>
     <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
+      <input {...item.input} placeholder={item.label} type={item.type} />
+      <div className="errorMessage">
+        {item.meta.touched && (item.meta.error && <span>{item.meta.error}</span>)}
+      </div>
+      <div className="warningMessage">
+        {item.meta.touched && (item.meta.warning && <span>{item.meta.warning}</span>)}
+      </div>
     </div>
   </div>
 )
 
-const FieldLevelValidationForm = props => {
+const FieldLevelValidationForm = (props: InjectedFormProps<IFullFormData>) => {
   const { handleSubmit, pristine, reset, submitting } = props
   return (
     <form onSubmit={handleSubmit}>
@@ -71,7 +55,6 @@ const FieldLevelValidationForm = props => {
         component={renderField}
         label="Email"
         validate={email}
-        warn={aol}
       />
       <Field
         name="age"
@@ -79,7 +62,6 @@ const FieldLevelValidationForm = props => {
         component={renderField}
         label="Age"
         validate={[required, number, minValue13]}
-        warn={tooYoung}
       />
       <Field
         name="phone"
@@ -100,6 +82,6 @@ const FieldLevelValidationForm = props => {
   )
 }
 
-export default reduxForm({
+export default reduxForm<IFullFormData>({
   form: 'fieldLevelValidation' // a unique identifier for this form
 })(FieldLevelValidationForm)

@@ -8,6 +8,7 @@ import FullForm from './FullForm';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
+import ValidatedForm from './ValidatedForm';
 
 const reducer = combineReducers({
   form: reduxFormReducer
@@ -32,7 +33,8 @@ const App: React.FC = () => {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           {/* <SimpleForm onSubmit={showResults} /> */} {/* message="Hello Rob!" /> */}
-          <FullForm onSubmit={showResults} />
+          {/* <FullForm onSubmit={showResults} /> */}
+          <ValidatedForm onSubmit={showResults}></ValidatedForm>
         </header>
       </div>
     </Provider>
