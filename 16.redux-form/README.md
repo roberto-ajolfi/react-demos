@@ -1,3 +1,12 @@
+```
+<FirstStepsContainer /> // containers per i primi giri
+    <SimpleForm />
+    <FullForm />
+    <ValidatedForm />
+
+<PeopleContainer /> // containers per integrazione
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Required Libraries

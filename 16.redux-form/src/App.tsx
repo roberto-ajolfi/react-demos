@@ -3,18 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import SimpleForm from './SimpleForm';
 import FullForm from './FullForm';
-
-
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import { reducer as reduxFormReducer } from 'redux-form';
 import ValidatedForm from './ValidatedForm';
-
-const reducer = combineReducers({
-  form: reduxFormReducer
-});
-
-const store = createStore(reducer);
+import { store } from './Store';
+import { Container, Row, Col } from 'reactstrap';
+import PeopleForm from './PeopleForm';
+import PeopleList from './PeopleList';
 
 const showResults = (values: any) =>
   new Promise(resolve => {
@@ -26,17 +20,44 @@ const showResults = (values: any) =>
     }, 500);
   });
 
+const PeopleContainer: React.FC = () => {
+  return (
+    <Container>
+      <Row>
+        <Col>
+          <h1>ReduxForm with Redux</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <PeopleForm />
+        </Col>
+        <Col>
+          <PeopleList />
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+
+const FirstStepsContainer : React.FC = () => {
+  return (
+    <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <SimpleForm onSubmit={showResults} /> {/* message="Hello Rob!" /> */}
+          {/* <FullForm onSubmit={showResults} /> */}
+          {/* <ValidatedForm onSubmit={showResults}></ValidatedForm> */}
+        </header>
+      </div>
+  );
+}
+
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          {/* <SimpleForm onSubmit={showResults} /> */} {/* message="Hello Rob!" /> */}
-          {/* <FullForm onSubmit={showResults} /> */}
-          <ValidatedForm onSubmit={showResults}></ValidatedForm>
-        </header>
-      </div>
+      <FirstStepsContainer></FirstStepsContainer>
+      {/* <PeopleContainer></PeopleContainer> */}
     </Provider>
   );
 };
