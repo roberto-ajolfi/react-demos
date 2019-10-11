@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { InjectedFormProps, Field, reduxForm, reset } from 'redux-form'
 import { connect } from 'react-redux';
-import { actionTypes } from './Actions';
+import { actionTypes } from '../actions/Actions';
 import { Dispatch } from 'redux';
 import * as MyTypes from "MyTypes";
 import { Row, Col } from 'reactstrap';

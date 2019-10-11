@@ -1,14 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import SimpleForm from './SimpleForm';
-import FullForm from './FullForm';
+import SimpleForm from './components/SimpleForm';
+import FullForm from './components/FullForm';
 import { Provider } from 'react-redux';
-import ValidatedForm from './ValidatedForm';
+import ValidatedForm from './components/ValidatedForm';
 import { store } from './Store';
 import { Container, Row, Col } from 'reactstrap';
-import PeopleForm from './PeopleForm';
-import PeopleList from './PeopleList';
+import PeopleForm from './components/PeopleForm';
+import PeopleList from './components/PeopleList';
 
 const showResults = (values: any) =>
   new Promise(resolve => {

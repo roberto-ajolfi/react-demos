@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
-import { required, maxLength, minLength, minValue, email, alphaNumeric, number, phoneNumber } from './ValidationRules';
+import { required, maxLength, minLength, minValue, email, alphaNumeric, number, phoneNumber } from '../ValidationRules';
 
 //== LOCAL VALIDATORS =====
 const maxLength15 = maxLength(15);

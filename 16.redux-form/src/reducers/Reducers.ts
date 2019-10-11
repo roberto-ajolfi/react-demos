@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
-import { actionTypes } from './Actions';
+import { actionTypes } from '../actions/Actions';
 import * as MyTypes from "MyTypes";
 
 interface IPeopleModel {

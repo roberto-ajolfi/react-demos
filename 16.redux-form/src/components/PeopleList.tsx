@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Table } from 'reactstrap'
 import { connect } from 'react-redux';
 import * as MyTypes from "MyTypes";
-import { actionTypes } from './Actions';
+import { actionTypes } from '../actions/Actions';
 import { Dispatch } from "redux";
 
 interface IPeopleListProps {
