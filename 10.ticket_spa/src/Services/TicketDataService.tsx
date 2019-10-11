@@ -5,8 +5,9 @@ export default class TicketDataService {
     //apiURL: string = "https://localhost:44328/api/ticket";
     //apiURL: string = "https://icticketing.azurewebsites.net/api/ticketanon";
     apiURL: string = "https://icticketing.azurewebsites.net/api/ticket";
+    basicAuthAccount: string = process.env.REACT_APP_USERNAME + ":" + process.env.REACT_APP_PASSWORD
     basicHeaders: Headers = new Headers({
-        "Authorization": "Basic " + btoa("guest1:Gu&st!"),
+        "Authorization": "Basic " + btoa(this.basicAuthAccount),
         "Accept": "application/json",
         "Content-Type": "application/json"
     });

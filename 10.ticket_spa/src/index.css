@@ -163,3 +163,8 @@ table.editingLineTable {
   color: steelblue;
   font-style: italic;
 }
+
+.navUsername {
+  font-size: 0.8em;
+  color: goldenrod;
+}

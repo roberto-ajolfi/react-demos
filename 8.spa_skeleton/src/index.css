@@ -154,3 +154,8 @@ table.editingLineTable {
       padding: 40px;
   }
 }
+
+.navUsername {
+  font-size: 0.7em;
+  color: goldenrod;
+}
