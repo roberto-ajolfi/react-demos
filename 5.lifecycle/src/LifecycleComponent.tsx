@@ -5,11 +5,9 @@ export default class LifecycleComponent extends Component<any, any> {
         super(props);
 
         this.state = { company: 'iCubed' };
-
-        this.toggleCompany = this.toggleCompany.bind(this);
     }
 
-    toggleCompany() {
+    toggleCompany = () => {
         const newValue = this.state.company == 'iCubed' ? 'ZeusLab' : 'iCubed';
         this.setState((prevState: any) => {
             return {company: newValue };
@@ -38,12 +36,21 @@ export default class LifecycleComponent extends Component<any, any> {
         console.log("[componentWillUnmount] l'istanza di un component sta per essere sganciata o rimossa.");
     }
 
-    componentWillReceiveProps() {
-        console.log("[componentWillReceiveProps] l'istanza di un component sta per ricevere un aggiornamneto delle props.");
+    componentWillReceiveProps(nextProps: any) {
+        console.log(
+            "[componentWillReceiveProps] l'istanza di un component sta per" + 
+            " ricevere un aggiornamento delle props => " +
+            nextProps.name
+        );
     }
 
-    shouldComponentUpdate() {
-        console.log("[shouldComponentUpdate] l'istanza di un component sta per essere aggiornata.");
+    shouldComponentUpdate(nextProps: any, nextState: any) {
+        console.log(
+            "[shouldComponentUpdate] l'istanza di un component sta per essere aggiornata." + 
+            " Props: " + nextProps.name + 
+            " State: " + nextState.company
+        );
+
         return true;
     }
 

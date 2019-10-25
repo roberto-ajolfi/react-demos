@@ -3,8 +3,8 @@ import Ticket from "../Models/TicketModel";
 
 export default class TicketDataService {
     //apiURL: string = "https://localhost:44328/api/ticket";
-    //apiURL: string = "https://icticketing.azurewebsites.net/api/ticketanon";
-    apiURL: string = "https://icticketing.azurewebsites.net/api/ticket";
+    apiURL: string = "https://icticketing.azurewebsites.net/api/ticketanon";
+    //apiURL: string = "https://icticketing.azurewebsites.net/api/ticket";
     basicAuthAccount: string = process.env.REACT_APP_USERNAME + ":" + process.env.REACT_APP_PASSWORD
     basicHeaders: Headers = new Headers({
         "Authorization": "Basic " + btoa(this.basicAuthAccount),
@@ -34,7 +34,7 @@ export default class TicketDataService {
 
             return data;
         } catch(err) {
-            return [];
+            return {};
         }
     }
 
@@ -44,7 +44,6 @@ export default class TicketDataService {
                 method: 'DELETE',
                 headers: this.basicHeaders
             });
-            const data = await promise.json();
 
             return;
         } catch(err) {
@@ -59,7 +58,6 @@ export default class TicketDataService {
                 headers: this.basicHeaders,
                 body: JSON.stringify(ticket)
             });
-            const data = await promise.json();
 
             return;
         } catch(err) {
@@ -74,7 +72,6 @@ export default class TicketDataService {
                 headers: this.basicHeaders,
                 body: JSON.stringify(ticket)
             });
-            const data = await promise.json();
 
             return;
         } catch(err) {
