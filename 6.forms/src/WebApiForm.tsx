@@ -12,12 +12,10 @@ export default class WebApiForm extends Component<any, any> {
             state: '',
             states: []
         };
-        
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
     apiURL: string = "https://localhost:44328/api/state";
+    
     async getState() {
         try {
             var promise = await fetch(this.apiURL, {
@@ -45,7 +43,7 @@ export default class WebApiForm extends Component<any, any> {
         );
     }
 
-    handleSubmit(event: any) {
+    handleSubmit = (event: any) => {
         alert('Submitted: on ' + this.state.date + " " +
             this.state.name + ' is a ' + this.state.role +
             " (State: " + this.state.state + ")");
@@ -56,7 +54,7 @@ export default class WebApiForm extends Component<any, any> {
         this.setState({ value: event.target.value });
     } */
 
-    handleChange(event: any) {
+    handleChange = (event: any) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;

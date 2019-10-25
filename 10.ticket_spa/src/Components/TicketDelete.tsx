@@ -18,8 +18,6 @@ export default class TicketDelete extends Component<RouteComponentProps<{ id: st
             ticketToBeDeleted: {} as Ticket,
             completed: false
         };
-
-        this.deleteTicket = this.deleteTicket.bind(this);
     }
 
     componentDidMount() {
@@ -36,7 +34,7 @@ export default class TicketDelete extends Component<RouteComponentProps<{ id: st
             });
     }
 
-    deleteTicket() {
+    deleteTicket = () => {
         const { match } = this.props;
         const service = new TicketDataService();
 

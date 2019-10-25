@@ -5,12 +5,11 @@ export default class UncontrolledForm extends Component<any, any> {
 
     constructor(props: any) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
         
         this.fileInputTag = React.createRef();
     }
 
-    handleSubmit(event: any) {
+    handleSubmit = (event: any) => {
         event.preventDefault();
         alert(`è stato selezionato il file: ${this.fileInputTag.current.files[0].name}`);
     }

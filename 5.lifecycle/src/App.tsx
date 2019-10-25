@@ -8,11 +8,9 @@ class App extends Component<any, any> {
     super(props);
 
     this.state = { userName: 'Roberto' };
-
-    this.toggleUserName = this.toggleUserName.bind(this);
   }
 
-  toggleUserName() {
+  toggleUserName = () => {
     const newValue = this.state.userName == 'Roberto' ? 'Alessandro' : 'Roberto';
         this.setState((prevState: any) => {
             return {userName: newValue };
@@ -20,11 +18,14 @@ class App extends Component<any, any> {
   }
 
   render() {
+	const lifecycleComp = !this.state.unmount &&
+      <LifecycleComponent name={this.state.userName}></LifecycleComponent>;
+	  
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <LifecycleComponent name={this.state.userName}></LifecycleComponent>
+		  {lifecycleComp}
           <button onClick={this.toggleUserName}>Switch User</button>
           <a
             className="App-link"

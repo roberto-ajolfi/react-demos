@@ -18,10 +18,9 @@ export default class StatefulComponent extends Component<any, StatefulComponentS
             },
             false,
             'Show');
-        this.toggleDetails = this.toggleDetails.bind(this);
     }
 
-    toggleDetails() {
+    toggleDetails = () => {
         const label = this.state.detailsVisibilityLabel == 'Show' ? 'Hide' : 'Show';
         this.setState((prevState: StatefulComponentState) => {
             return { 

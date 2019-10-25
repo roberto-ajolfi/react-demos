@@ -15,9 +15,6 @@ export default class SimpleForm extends Component<any, any> {
             date: moment().format("YYYY-MM-DD")
         };
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-
         this.validator = new SimpleReactValidator({
             className: 'errorMessage',
             messages: {
@@ -27,7 +24,7 @@ export default class SimpleForm extends Component<any, any> {
         });
     }
 
-    handleSubmit(event: any) {
+    handleSubmit = (event: any) => {
         if(this.validator.allValid()) {
             alert('Form Data: ' + JSON.stringify(this.state));
         } else {
@@ -38,7 +35,7 @@ export default class SimpleForm extends Component<any, any> {
         event.preventDefault();
     }
 
-    handleChange(event: any) {
+    handleChange = (event: any) => {
         const target = event.target;
         const value = target.type == 'checkbox' ? target.checked : target.value;
         const name = target.name;

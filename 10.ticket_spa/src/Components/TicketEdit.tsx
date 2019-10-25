@@ -20,9 +20,6 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
     super(props);
 
     this.state = { id: '', title: '', description: '', category: '', priority: 0, state: 0, completed: false };
-    
-    this.updateTicket = this.updateTicket.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +43,7 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
       });
   }
 
-  updateTicket(event: any) {
+  updateTicket = (event: any) => {
     event.preventDefault();
 
     const service = new TicketDataService();
@@ -71,7 +68,7 @@ export default class TicketEdit extends Component<RouteComponentProps<{ id: stri
         });
   }
 
-  handleChange(event: any) {
+  handleChange = (event: any) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;

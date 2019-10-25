@@ -18,11 +18,9 @@ export default class TicketCreate extends Component<any, TicketCreateState> {
 
     this.state = { title: '', description: '', category: '', priority: '', completed: false };
     
-    this.createTicket = this.createTicket.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  createTicket(event: any) {
+  createTicket = (event: any) => {
     event.preventDefault();
 
     const service = new TicketDataService();
@@ -47,7 +45,7 @@ export default class TicketCreate extends Component<any, TicketCreateState> {
         });
   }
 
-  handleChange(event: any) {
+  handleChange = (event: any) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;

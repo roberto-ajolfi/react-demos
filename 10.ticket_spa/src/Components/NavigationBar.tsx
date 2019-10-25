@@ -7,15 +7,14 @@ export default class NavigationBar extends Component<any, any> {
     navActiveStyle: any = { "color":"steelblue" };
 
     constructor (props: any) {
-    super(props);
-
-    this.toggleNavbar = this.toggleNavbar.bind(this);
+        super(props);
+        
         this.state = {
             collapsed: true
         };
     }
 
-    toggleNavbar () {
+    toggleNavbar = () => {
         this.setState({
             collapsed: !this.state.collapsed
         });
