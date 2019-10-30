@@ -1,7 +1,18 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import Typography from '@material-ui/core/Typography'
+import { TextField, Paper, Button, Grid, Select, MenuItem, withStyles } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
 
-export default class Form extends Component<any, any> {
+const styles = {
+        root: {      
+            padding: 20,
+            backgroundColor: '#F0F0F0'
+        }
+  };
+
+class Form extends Component<any, any> {
     constructor(props: any) {
         super(props);
 
@@ -30,36 +41,51 @@ export default class Form extends Component<any, any> {
         this.setState({
           [name]: value
         });
-      }
+    }
 
     render() {
+        const { classes } = this.props
+
         return (
             <form onSubmit={this.handleSubmit}>
-                <h2>Regular Form</h2>
-                <div className="form-group row">
-                    <label htmlFor="name">Name</label>
-                    <input className="form-control" type="text" name="name" 
-                        value={this.state.name} onChange={this.handleChange}/> 
-                </div>
-                <div className="form-group row">
-                    <label htmlFor="role">Role</label>
-                    <select className="form-control" name="role" 
-                        value={this.state.role} onChange={this.handleChange}>
-                        <option value="na">-- Select a Role --</option>
-                        <option value="admin">Administrator</option>
-                        <option value="user">Regular User</option>
-                        <option value="guest">Guest User</option>
-                    </select> 
-                </div>
-                <div className="form-group row">
-                    <label htmlFor="date">Date</label>
-                    <input className="form-control" type="date" name="date" 
-                        value={this.state.date} onChange={this.handleChange}/> 
-                </div>
-                <div className="form-group row">
-                    <input className="btn btn-primary" type="submit" value="Submit" /> 
-                </div>
+                <Grid container spacing={4}>
+                    <Grid item xs={12}>
+                        <Typography variant='h4' align='center'>Regular Form</Typography>
+                    </Grid>
+                    <Grid item xs={3}>&nbsp;</Grid>
+                    <Grid item xs={6}>
+                        <Paper className={classes.root}>
+                            <Grid item xs={12}>
+                                <TextField name='name' label='Name' value={this.state.name} 
+                                    onChange={this.handleChange} margin='normal' />
+                            </Grid>
+                            <Grid item xs={12}>&nbsp;</Grid>
+                            <Grid item xs={12}>
+                                <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                                <Select
+                                    autoWidth={false}
+                                    labelId="demo-simple-select-label"
+                                    name="role"
+                                    value={this.state.role}
+                                    onChange={this.handleChange}>
+                                        <MenuItem value={'na'}>-- Select a Role --</MenuItem>
+                                        <MenuItem value={'admin'}>Administrator</MenuItem>
+                                        <MenuItem value={'user'}>Regular User</MenuItem>
+                                        <MenuItem value={'guest'}>Guest User</MenuItem>
+                                </Select>
+                            </Grid>
+                            <Grid item xs={12}>&nbsp;</Grid>
+                            <Grid item xs={12}>
+                                <Button type='submit' color='primary' 
+                                    variant='outlined' startIcon={<SaveAltIcon />}>Submit</Button>
+                            </Grid>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={3}>&nbsp;</Grid>
+                </Grid>
             </form>
         )
     }
 }
+
+export default withStyles(styles)(Form)
