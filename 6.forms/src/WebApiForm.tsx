@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import DynamicFeedIcon from '@material-ui/icons/DynamicFeed';
+import AppStyles from './styles';
+import { withStyles } from '@material-ui/styles';
+import { Grid, Paper, Button, Typography, TextField, InputAdornment, InputLabel, Select, MenuItem } from '@material-ui/core';
 
-export default class WebApiForm extends Component<any, any> {
+class WebApiForm extends Component<any, any> {
     constructor(props: any) {
         super(props);
 
@@ -9,7 +16,7 @@ export default class WebApiForm extends Component<any, any> {
             name: '', 
             role: 'na', 
             date: moment().format("YYYY-MM-DD"),
-            state: '',
+            state: 'na',
             states: []
         };
     }
@@ -65,52 +72,84 @@ export default class WebApiForm extends Component<any, any> {
       }
 
     render() {
-        const stateOptions = (<React.Fragment>
-            { this.state.states.map(
+        const { classes } = this.props
+
+        const stateOptions = 
+            this.state.states.map(
                 (item: {id: number, description: string}) => 
-                    <option key={item.id} value={item.id}>{item.description}</option>
-            )}
-        </React.Fragment>);
-        const pippo = this.state.states.map(
-            (item: {id: number, description: string}) => 
-                <option value={item.id}>{item.description}</option>
-        );
+                    <MenuItem key={item.id} value={item.description}>{item.description}</MenuItem>
+            );
         
         return (
-            <form onSubmit={this.handleSubmit}>
-                <h2>Regular Form</h2>
-                <div className="form-group row">
-                    <label htmlFor="name">Name</label>
-                    <input className="form-control" type="text" name="name" 
-                        value={this.state.name} onChange={this.handleChange}/> 
-                </div>
-                <div className="form-group row">
-                    <label htmlFor="role">Role</label>
-                    <select className="form-control" name="role" 
-                        value={this.state.role} onChange={this.handleChange}>
-                        <option value="na">-- Select a Role --</option>
-                        <option value="admin">Administrator</option>
-                        <option value="user">Regular User</option>
-                        <option value="guest">Guest User</option>
-                    </select> 
-                </div>
-                <div className="form-group row">
-                    <label htmlFor="state">State</label>
-                    <select className="form-control" name="state" 
-                        value={this.state.state} onChange={this.handleChange}>
-                        <option value="na">-- Select a State --</option>
-                        {stateOptions}
-                    </select> 
-                </div>
-                <div className="form-group row">
-                    <label htmlFor="date">Date</label>
-                    <input className="form-control" type="date" name="date" 
-                        value={this.state.date} onChange={this.handleChange}/> 
-                </div>
-                <div className="form-group row">
-                    <input className="btn btn-primary" type="submit" value="Submit" /> 
-                </div>
-            </form>
+            <Grid container spacing={4}>
+                <Grid item xs={12}>
+                    <Typography variant='h4' align='center'>WebAPI Form</Typography>
+                </Grid>
+                <Grid item xs={3}>&nbsp;</Grid>
+                <Grid item xs={6}>
+                    <Paper className={classes.root}>
+                    <form onSubmit={this.handleSubmit}>
+                        <Grid item xs={12}>
+                            <TextField name='name' label='Name' value={this.state.name} 
+                                onChange={this.handleChange} margin='normal'
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position='start'>
+                                        <PersonOutlineIcon />
+                                      </InputAdornment>
+                                     )
+                                    }} required />
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12}>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                name="role"
+                                value={this.state.role}
+                                onChange={this.handleChange}
+                                required>
+                                    <MenuItem value={'na'}><em>Select a Role</em></MenuItem>
+                                    <MenuItem value={'admin'}>Administrator</MenuItem>
+                                    <MenuItem value={'user'}>Regular User</MenuItem>
+                                    <MenuItem value={'guest'}>Guest User</MenuItem>
+                            </Select>
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12}>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                name="state"
+                                value={this.state.state}
+                                onChange={this.handleChange}
+                                required>
+                                    <MenuItem value={'na'}><em>Select a State</em></MenuItem>
+                                    {stateOptions}
+                            </Select>
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12}>
+                            <TextField name='date' label='Birth Date' value={this.state.date} 
+                                onChange={this.handleChange} margin='normal'
+                                type='date' InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position='start'>
+                                        <CalendarTodayIcon />
+                                      </InputAdornment>
+                                     )
+                                    }} />
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12} className={classes.center}>
+                            <Button type='submit' color='primary'
+                                variant='outlined' startIcon={<SaveAltIcon />}>Submit</Button>
+                        </Grid>
+                    </form>
+                    </Paper>
+                </Grid>
+                <Grid item xs={3}>&nbsp;</Grid>
+            </Grid>
         )
     }
 }
+
+export default withStyles(AppStyles)(WebApiForm)

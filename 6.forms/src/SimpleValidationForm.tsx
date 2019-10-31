@@ -1,8 +1,14 @@
 import React, { Component, ChangeEvent } from "react";
 import SimpleReactValidator from 'simple-react-validator/dist/simple-react-validator.min.js';
 import moment from 'moment'
+import AppStyles from './styles';
+import { withStyles } from "@material-ui/styles";
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import { Typography, Paper, Grid, TextField, InputAdornment, Button, MenuItem, Select } from "@material-ui/core";
 
-export default class SimpleForm extends Component<any, any> {
+class SimpleForm extends Component<any, any> {
     validator: any;
 
     constructor(props: any) {
@@ -11,7 +17,7 @@ export default class SimpleForm extends Component<any, any> {
         this.state ={
             firstName: '',
             lastName: '',
-            role: 'admin',
+            role: 'na',
             date: moment().format("YYYY-MM-DD")
         };
 
@@ -44,41 +50,79 @@ export default class SimpleForm extends Component<any, any> {
     }
 
     render() {
+        const { classes } = this.props
+        
         return (
-            <form onSubmit={this.handleSubmit}>
-                <h2>SimpleValidation Form</h2>
-                <div className="form-group row">
-                    <label htmlFor="firstName">First Name</label>
-                    <input className="form-control" type="text" name="firstName"
-                        value = {this.state.firstName} onChange={this.handleChange} />
-                    {this.validator.message('FirstName', this.state.firstName, 'required|alpha')}
-                </div>
-                <div className="form-group row">
-                    <label htmlFor="lastname">Last Name</label>
-                    <input className="form-control" type="text" name="lastName"
-                        value = {this.state.lastName} onChange={this.handleChange} />
-                </div>
-                <div className="form-group row">
-                    <label htmlFor="role">Role</label>
-                    <select className="form-control" name="role" 
-                        value={this.state.role} onChange={this.handleChange}>
-                        <option value="">-- Select a Role --</option>
-                        <option value="admin">Administrator</option>
-                        <option value="user">Regular User</option>
-                        <option value="guest">Guest User</option>
-                    </select> 
-                    {this.validator.message('Role', this.state.role, 'required')}
-                </div>
-                <div className="form-group row">
-                    <label htmlFor="date">Date</label>
-                    <input className="form-control" type="date" name="date" 
-                        value={this.state.date} onChange={this.handleChange}/> 
-                </div>
-                <div className="form-group row">
-                    <input className="btn btn-primary" type="submit" 
-                        value="Submit" /* disabled={!this.validator.allValid()} */ />
-                </div>
-            </form>
+            <Grid container spacing={4}>
+                <Grid item xs={12}>
+                    <Typography variant='h4' align='center'>SimpleValidation Form</Typography>
+                </Grid>
+                <Grid item xs={3}>&nbsp;</Grid>
+                <Grid item xs={6}>
+                    <Paper className={classes.root}>
+                    <form onSubmit={this.handleSubmit}>
+                        <Grid item xs={12}>
+                            <TextField name='firstName' label='First Name' value={this.state.firstName} 
+                                onChange={this.handleChange} margin='normal'
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position='start'>
+                                        <PersonOutlineIcon />
+                                      </InputAdornment>
+                                     )
+                                    }} />
+                            {this.validator.message('FirstName', this.state.firstName, 'required|alpha')}
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12}>
+                            <TextField name='lastName' label='Last Name' value={this.state.lastName} 
+                                onChange={this.handleChange} margin='normal'
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position='start'>
+                                        <PersonOutlineIcon />
+                                      </InputAdornment>
+                                     )
+                                    }} />
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12}>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                name="role"
+                                value={this.state.role}
+                                onChange={this.handleChange}>
+                                    <MenuItem value={'na'}>Select a Role</MenuItem>
+                                    <MenuItem value={'admin'}>Administrator</MenuItem>
+                                    <MenuItem value={'user'}>Regular User</MenuItem>
+                                    <MenuItem value={'guest'}>Guest User</MenuItem>
+                            </Select>
+                            {this.validator.message('Role', this.state.role, 'not_in:na')}
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12}>
+                            <TextField name='date' label='Birth Date' value={this.state.date} 
+                                onChange={this.handleChange} margin='normal'
+                                type='date' InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position='start'>
+                                        <CalendarTodayIcon />
+                                      </InputAdornment>
+                                     )
+                                    }} />
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12} className={classes.center}>
+                            <Button type='submit' color='primary'
+                                variant='outlined' startIcon={<SaveAltIcon />}>Submit</Button>
+                        </Grid>
+
+                    </form>
+                    </Paper>
+                </Grid>
+            </Grid>
         );
     }
 }
+
+export default withStyles(AppStyles)(SimpleForm)

@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Typography from '@material-ui/core/Typography'
-import { TextField, Paper, Button, Grid, Select, MenuItem, withStyles } from '@material-ui/core';
+import { TextField, Paper, Button, Grid, Select, MenuItem, withStyles, InputAdornment } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-
-const styles = {
-        root: {      
-            padding: 20,
-            backgroundColor: '#F0F0F0'
-        }
-  };
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import AppStyles from './styles';
 
 class Form extends Component<any, any> {
     constructor(props: any) {
@@ -47,45 +42,51 @@ class Form extends Component<any, any> {
         const { classes } = this.props
 
         return (
-            <form onSubmit={this.handleSubmit}>
-                <Grid container spacing={4}>
-                    <Grid item xs={12}>
-                        <Typography variant='h4' align='center'>Regular Form</Typography>
-                    </Grid>
-                    <Grid item xs={3}>&nbsp;</Grid>
-                    <Grid item xs={6}>
-                        <Paper className={classes.root}>
-                            <Grid item xs={12}>
-                                <TextField name='name' label='Name' value={this.state.name} 
-                                    onChange={this.handleChange} margin='normal' />
-                            </Grid>
-                            <Grid item xs={12}>&nbsp;</Grid>
-                            <Grid item xs={12}>
-                                <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                                <Select
-                                    autoWidth={false}
-                                    labelId="demo-simple-select-label"
-                                    name="role"
-                                    value={this.state.role}
-                                    onChange={this.handleChange}>
-                                        <MenuItem value={'na'}>-- Select a Role --</MenuItem>
-                                        <MenuItem value={'admin'}>Administrator</MenuItem>
-                                        <MenuItem value={'user'}>Regular User</MenuItem>
-                                        <MenuItem value={'guest'}>Guest User</MenuItem>
-                                </Select>
-                            </Grid>
-                            <Grid item xs={12}>&nbsp;</Grid>
-                            <Grid item xs={12}>
-                                <Button type='submit' color='primary' 
-                                    variant='outlined' startIcon={<SaveAltIcon />}>Submit</Button>
-                            </Grid>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={3}>&nbsp;</Grid>
+            <Grid container spacing={4}>
+                <Grid item xs={12}>
+                    <Typography variant='h4' align='center'>Regular Form</Typography>
                 </Grid>
-            </form>
+                <Grid item xs={3}>&nbsp;</Grid>
+                <Grid item xs={6}>
+                    <form onSubmit={this.handleSubmit}>
+                    <Paper className={classes.root}>
+                        <Grid item xs={12}>
+                            <TextField name='name' label='Name' value={this.state.name} 
+                                onChange={this.handleChange} margin='normal'
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position='start'>
+                                        <PersonOutlineIcon />
+                                      </InputAdornment>
+                                     )
+                                    }} />
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12}>
+                            <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                name="role"
+                                value={this.state.role}
+                                onChange={this.handleChange}>
+                                    <MenuItem value={'na'}>Select a Role</MenuItem>
+                                    <MenuItem value={'admin'}>Administrator</MenuItem>
+                                    <MenuItem value={'user'}>Regular User</MenuItem>
+                                    <MenuItem value={'guest'}>Guest User</MenuItem>
+                            </Select>
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12} className={classes.center}>
+                            <Button type='submit' color='primary'
+                                variant='outlined' startIcon={<SaveAltIcon />}>Submit</Button>
+                        </Grid>
+                    </Paper>
+                    </form>
+                </Grid>
+                <Grid item xs={3}>&nbsp;</Grid>
+            </Grid>
         )
     }
 }
 
-export default withStyles(styles)(Form)
+export default withStyles(AppStyles)(Form)
