@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Table } from 'reactstrap';
 import TicketDataService from '../services/dataService';
+import { Paper, withStyles, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import AppStyles from '../styles';
 
-export default class List extends Component<any, any> {
+class List extends Component<any, any> {
     constructor(props: any){
         super(props);
 
@@ -32,34 +33,40 @@ export default class List extends Component<any, any> {
     }
 
     render() {
+        const { classes } = this.props;
         const { error, loading, items } = this.state;
+
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (loading) {
             return <div>Loading...</div>;
         } else {
             return (
-                <Table striped>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Priority</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Paper className={classes.root}>
+                    <Table>
+                        <TableHead className={classes.tableHead}>
+                            <TableRow>
+                                <TableCell className={classes.whiteText}>ID</TableCell>
+                                <TableCell className={classes.whiteText}>Title</TableCell>
+                                <TableCell className={classes.whiteText} align="center">Category</TableCell>
+                                <TableCell className={classes.whiteText} align="center">Priority</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
                         {items.map((item: any) => (
-                            <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <td>{item.title}</td>
-                                <td>{item.category}</td>
-                                <td>{item.priority}</td>
-                            </tr>
+                            <TableRow key={item.id}>
+                                <TableCell>{item.id}</TableCell>
+                                <TableCell>{item.title}</TableCell>
+                                <TableCell align="center">{item.category}</TableCell>
+                                <TableCell align="center">{item.priority}</TableCell>
+                            </TableRow>
                         ))}
-                    </tbody>
-                </Table>
+                        </TableBody>
+                    </Table>
+                </Paper>
             )
         }
     }
 }
+
+export default withStyles(AppStyles)(List)

@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import List from './components/List';
-import { Container } from 'reactstrap';
+import { Grid, Typography } from '@material-ui/core';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Container>
-          <h1>API Calling</h1>
-          <List></List>
-        </Container>
+        <Grid container spacing={4}>
+          <Grid item xs={12}>
+            <Typography variant='h4' align='center'>API Calling</Typography>
+          </Grid>
+          <Grid item xs={2}>&nbsp;</Grid>
+          <Grid item xs={8}>
+            <List></List>
+          </Grid>
+          <Grid item xs={2}>&nbsp;</Grid>
+        </Grid>
       </div>
     );
   }
