@@ -28,6 +28,47 @@ class Form extends Component<any, any> {
         this.setState({ value: event.target.value });
     } */
 
+    /* TYPED EVENT OBJECTS - THEY DON'T WORK WITH REACT MATERIAL UI !!!
+    /* handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const target = event.target;
+        const targetName = target.name;
+        const targetValue = target.value;
+
+        //@ts-ignore
+        this.setState({ [targetName]: targetValue });
+    }
+
+    handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const target = event.target;
+        const targetName = target.name;
+        const targetValue = target.value;
+
+        //@ts-ignore
+        this.setState({ [targetName]: targetValue });
+    }
+
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const target = event.target;
+        const targetName = target.name;
+        const targetValue = 
+            target.type === 'checkbox' ?
+            target.checked :
+            target.type == 'file' ?
+                this.fileRef.current.files[0].name :
+                target.value;
+
+        //@ts-ignore
+        this.setState({ [targetName] : targetValue });
+    }
+
+    handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        //this.setState({ attachmentName: this.fileRef.current.files[0].name });
+        //alert(this.fileRef.current.files[0].name);
+        alert('Form Data: ' + JSON.stringify(this.state));
+    } */
+
+
     handleChange = (event: any) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;

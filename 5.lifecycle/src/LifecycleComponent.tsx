@@ -23,17 +23,10 @@ export default class LifecycleComponent extends Component<any, any> {
             </div>
         )
     }
-
-    componentWillMount() {
+	
+	/* SOLO REACT PRE 16.11.0 */
+    /* componentWillMount() {
         console.log("[componentWillMount] l’istanza di un componente sta per essere agganciata o ridisegnata.");
-    }
-
-    componentDidMount() {
-        console.log("[componentDidMount] l’istanza di un componente è stata agganciata o ridisegnata.");
-    }
-
-    componentWillUnmount() {
-        console.log("[componentWillUnmount] l'istanza di un component sta per essere sganciata o rimossa.");
     }
 
     componentWillReceiveProps(nextProps: any) {
@@ -42,6 +35,18 @@ export default class LifecycleComponent extends Component<any, any> {
             " ricevere un aggiornamento delle props => " +
             nextProps.name
         );
+    }
+
+    componentWillUpdate() {
+        console.log("[componentWillUpdate] l'istanza di un component sta per essere aggiornata.");
+    } */
+
+    componentDidMount() {
+        console.log("[componentDidMount] l’istanza di un componente è stata agganciata o ridisegnata.");
+    }
+
+    componentWillUnmount() {
+        console.log("[componentWillUnmount] l'istanza di un component sta per essere sganciata o rimossa.");
     }
 
     shouldComponentUpdate(nextProps: any, nextState: any) {
@@ -54,11 +59,19 @@ export default class LifecycleComponent extends Component<any, any> {
         return true;
     }
 
-    componentWillUpdate() {
-        console.log("[componentWillUpdate] l'istanza di un component sta per essere aggiornata.");
-    }
-
     componentDidUpdate() {
         console.log("[componentDidUpdate] l'istanza di un component è stata aggiornata.");
+    }
+
+    static getDerivedStateFromProps(nextProps: any) {
+        console.log("[getDerivedStateFromProps] ??? Value: " + nextProps.name);
+
+        return {};
+    }
+
+    getSnapshotBeforeUpdate(prevProps: any, prevState: any) {
+        console.log("[getSnapshotBeforeUpdate] ??? ");
+
+        return null;
     }
 }
