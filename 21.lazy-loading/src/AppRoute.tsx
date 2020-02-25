@@ -10,6 +10,7 @@ import NonLazyComponent from './NonLazyComponent';
 
 const ComponentA = React.lazy(() => import("./ComponentA"));
 const ComponentB = React.lazy(() => import("./ComponentB"));
+// const Admin = React.lazy(() => import("./Admin/Admin"));
 
 // File Modificati
 //
@@ -24,10 +25,12 @@ function AppRoute() {
           <BrowserRouter>
             <NonLazyComponent />
             <Link to="/">Home</Link><Link to="/compB">Component B</Link>
+            {/* <Link to="/admin">Admin</Link> */}
             <React.Suspense fallback={<div>Loading...</div>}>
               <Switch>
                 <Route exact path="/" component={ComponentA}/>
                 <Route path="/compB" component={ComponentB}/>
+                {/* <Route path="/admin" component={Admin}/> */}
               </Switch>
             </React.Suspense>
           </BrowserRouter>
