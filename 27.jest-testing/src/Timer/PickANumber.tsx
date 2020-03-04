@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 
-interface CardProps {
+interface PickANumberProps {
     onSelect: (item: number) => void;
 }
 
-const Card : React.FC<CardProps> = (props: CardProps) => {
+const PickANumber : React.FC<PickANumberProps> = (props: PickANumberProps) => {
   useEffect(() => {
     const timeoutID = setTimeout(() => {
       props.onSelect(null);
@@ -28,4 +28,4 @@ const Card : React.FC<CardProps> = (props: CardProps) => {
   
 }
 
-export default Card;
+export default PickANumber;

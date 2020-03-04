@@ -2,7 +2,7 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import User from "./User";
+import Customer from "./Customer";
 
 let container = null;
 beforeEach(() => {
@@ -21,8 +21,8 @@ afterEach(() => {
 it("renders user data", async () => {
   const fakeUser = {
     name: "Joni Baez",
-    age: "32",
-    address: "123, Charming Avenue"
+    address: "123, Charming Avenue",
+    openOrders: "10"
   };
 
   jest.spyOn(global, 'fetch').mockImplementation(() =>
@@ -33,11 +33,11 @@ it("renders user data", async () => {
 
   // Use the asynchronous version of act to apply resolved promises
   await act(async () => {
-    render(<User id="123" />, container);
+    render(<Customer id="123" />, container);
   });
 
   expect(container.querySelector("summary").textContent).toBe(fakeUser.name);
-  expect(container.querySelector("strong").textContent).toBe(fakeUser.age);
+  expect(container.querySelector("strong").textContent).toBe(fakeUser.openOrders);
   expect(container.textContent).toContain(fakeUser.address);
 
   // remove the mock to ensure tests are completely isolated

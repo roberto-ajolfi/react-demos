@@ -1,21 +1,5 @@
 import { sum, sub, mult, div } from './service';
 
-import { unmountComponentAtNode } from "react-dom";
-
-let container = null;
-beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
-
 describe('Testing the service module', ()=> {
 
   test.only('adds 1 + 2 to equal 3', () => {

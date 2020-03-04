@@ -2,7 +2,7 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import Card from './Card';
+import PickANumber from './PickANumber';
 
 jest.useFakeTimers();
 
@@ -24,7 +24,7 @@ it("should select null after timing out", () => {
   const onSelect = jest.fn();
 
   act(() => {
-    render(<Card onSelect={onSelect} />, container);
+    render(<PickANumber onSelect={onSelect} />, container);
   });
 
   // move ahead in time by 100ms

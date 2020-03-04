@@ -5,7 +5,7 @@ export default class Hello extends Component<{name?: string}> {
         if (this.props.name) {
             return <h1>Hello, {this.props.name}!</h1>;
         } else {
-            return <span>Hey, stranger</span>;
+            return <span>Hey, straniero</span>;
         }
     }
 }

@@ -18,9 +18,9 @@ afterEach(() => {
   container = null;
 });
 
-test("renders with or without a name", () => {
+test("renders senza un nome", () => {
     act(() => {
         render(<Hello />, container);
     });
-    expect(container.textContent).toBe("Hey, stranger");
+    expect(container.textContent).toBe("Hey, straniero");
 });

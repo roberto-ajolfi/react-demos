@@ -1,7 +1,7 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-import Toggle from "./Toggle";
+import DarkMode from "./DarkMode";
 
 let container = null;
 beforeEach(() => {
@@ -21,16 +21,16 @@ test("renders with or without a name", () => {
     const onChange = jest.fn();
 
     act(() => {
-        render(<Toggle onChange={onChange} />, container);
+        render(<DarkMode onChange={onChange} />, container);
     });
 
-    const button = document.querySelector("[data-testid=toggle]");
-    expect(button.innerHTML).toBe("Turn on");
+    const button = document.querySelector("[data-testid=darkmode]");
+    expect(button.innerHTML).toBe("DarkMode on");
 
     act(() => {
         button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(button.innerHTML).toBe("Turn off");
+    expect(button.innerHTML).toBe("DarkMode off");
 });
