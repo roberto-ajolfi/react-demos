@@ -1,5 +1,4 @@
-import React, { useState, useEffect, Profiler } from 'react';
-//import { unstable_trace as trace } from "scheduler/tracing";
+import React, { useState, useEffect } from 'react';
 
 import Header from './Components/Header'
 import AddTodo from './Components/AddTodo'
@@ -8,10 +7,9 @@ import TodoFilter from './Components/TodoFilter'
 import StateContext from './StateContext'
 import { fetchAPITodos, generateID } from './Services/DataService'
 import Todo from './Todo';
-import onProfilerCallback from './ProfilerCallback';
 
 
-function App() {
+function TodoApp() {
   const [todos, setTodos] = useState([] as Todo[]);
   const [filteredTodos, setFilteredTodos] = useState([] as Todo[]);
   const [filter, setFilter] = useState('all');
@@ -19,12 +17,12 @@ function App() {
   // INITIAL LOADING OF THE TODOS VIA API
   useEffect(() => {
     fetchAPITodos().then((data: Todo[]) => {
-      setTodos(data)
+        setTodos(data)
     })
   }, [])
 
   const addTodo = (title: string) => {
-    const newTodo = new Todo(generateID(), title, false)
+    const newTodo = new Todo( generateID(), title, false )
 
     const t = [newTodo, ...todos];
     setTodos(t)
@@ -73,34 +71,28 @@ function App() {
   // MANAGE LIST OF FILTERED TODOS (IT CHANGES WHEN TODO LIST CHANGES OR FILTER CHANGES)
   useEffect(() => {
     setFilteredTodos(applyFilter(todos, filter));
-  }, [todos, filter]);
+ }, [todos, filter]);
 
-  const style = {
-    width: 400,
-    margin: "auto",
-    marginTop: 30,
-    backgroundColor: 'gray',
-    padding: 20
+  const style = { 
+    width: 400, 
+    margin: "auto", 
+    marginTop: 30, 
+    backgroundColor: 'gray', 
+    padding: 20 
   }
 
-  //trace("initial render", performance.now(), () =>
-
   return (
-      <StateContext.Provider value={filteredTodos}>
-        <div style={style}>
-          <Header />
-          <Profiler id='AddTodo' onRender={onProfilerCallback}>
-            <AddTodo addTodo={addTodo} />
-          </Profiler>
-          <hr />
-          <Profiler id='TodoList' onRender={onProfilerCallback}>
-            <TodoList toggleTodo={toggleTodo} removeTodo={removeTodo} />
-          </Profiler>
-          <hr />
-          <TodoFilter filter={filter} filterTodos={filterTodos} />
-        </div>
-      </StateContext.Provider>
+    <StateContext.Provider value={filteredTodos}>
+      <div style={style}>
+        <Header />
+        <AddTodo addTodo={addTodo} />
+        <hr />
+        <TodoList toggleTodo={toggleTodo} removeTodo={removeTodo} />
+        <hr />
+        <TodoFilter filter={filter} filterTodos={filterTodos} />
+      </div>
+    </StateContext.Provider>
   );
 }
 
-export default App;
+export default TodoApp;
