@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class LifecycleComponent extends Component<any, any> {
+export default class OldLifecycleComponent extends Component<any, any> {
     constructor(props: any) {
         super(props);
 
@@ -17,12 +17,29 @@ export default class LifecycleComponent extends Component<any, any> {
     render() {
         return (
             <div>
-                <h1>=== NEW LIFECYCLE ===</h1>
+                <h1>=== OLD LIFECYCLE ===</h1>
                 <h3>Hello {this.props.name} from {this.state.company}.<br/>
                 Please, check the Console in the Development Tools (F12)</h3>
                 <button onClick={this.toggleCompany}>Switch Company</button>
             </div>
         )
+    }
+	
+	/* SOLO REACT PRE 16.11.0 */
+    UNSAFE_componentWillMount() {
+        console.log("[UNSAFE_componentWillMount] l’istanza di un componente sta per essere agganciata o ridisegnata.");
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps: any) {
+        console.log(
+            "[UNSAFE_componentWillReceiveProps] l'istanza di un component sta per" + 
+            " ricevere un aggiornamento delle props => " +
+            nextProps.name
+        );
+    }
+
+    UNSAFE_componentWillUpdate() {
+        console.log("[UNSAFE_componentWillUpdate] l'istanza di un component sta per essere aggiornata.");
     }
 
     componentDidMount() {
@@ -45,17 +62,5 @@ export default class LifecycleComponent extends Component<any, any> {
 
     componentDidUpdate() {
         console.log("[componentDidUpdate] l'istanza di un component è stata aggiornata.");
-    }
-
-    static getDerivedStateFromProps(nextProps: any) {
-        console.log("[getDerivedStateFromProps] ??? Value: " + nextProps.name);
-
-        return {};
-    }
-
-    getSnapshotBeforeUpdate(prevProps: any, prevState: any) {
-        console.log("[getSnapshotBeforeUpdate] ??? ");
-
-        return null;
     }
 }

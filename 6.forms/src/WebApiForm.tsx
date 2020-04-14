@@ -21,7 +21,7 @@ class WebApiForm extends Component<any, any> {
         };
     }
 
-    apiURL: string = "https://localhost:44328/api/state";
+    apiURL: string = "https://icticketing.azurewebsites.net/api/state";
     
     async getState() {
         try {

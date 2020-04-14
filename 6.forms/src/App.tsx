@@ -10,11 +10,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Form></Form>
+        {/* <Form></Form> */}
         {/* <UncontrolledForm></UncontrolledForm> */}
         {/* <ValidateForm></ValidateForm> */}
         {/* <SimpleValidationForm></SimpleValidationForm> */}
-        {/* <WebApiForm></WebApiForm> */}
+        <WebApiForm></WebApiForm>
       </div>
     );
   }
