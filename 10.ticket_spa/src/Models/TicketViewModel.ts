@@ -6,7 +6,9 @@ export default class TicketView {
         public title: string,
         public description: string,
         public priority: string,
-        public state: string
+        public state: string,
+        public tenantCode: string,
+        public notes: number
     ) {
     }
 }

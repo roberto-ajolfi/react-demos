@@ -43,6 +43,11 @@ export default class TicketList extends Component<RouteComponentProps<{}>, Ticke
                 <td>{item.category}</td>
                 <td>{item.title}</td>
                 <td>{item.state}</td>
+                <td>{
+                    item.notes > 0 ?
+                        <span><i className="fa fa-file-text-o"></i>&nbsp;{item.notes}</span> :
+                        <span>-</span>
+                }</td>
                 <td>
                 <Link className="btn btn-outline-info btn-sm" to={"/edit/" + item.id }>
                     <i className="fa fa-pencil-square-o"></i>&nbsp;Edit
@@ -55,7 +60,7 @@ export default class TicketList extends Component<RouteComponentProps<{}>, Ticke
         ));
 
         let contents = this.state.loading
-            ? <tr><td colSpan={6} style={{"textAlign":"center"}}><span>Loading...</span></td></tr>
+            ? <tr><td colSpan={7} style={{"textAlign":"center"}}><span>Loading...</span></td></tr>
             : ticketData;
 
         return (
@@ -80,6 +85,7 @@ export default class TicketList extends Component<RouteComponentProps<{}>, Ticke
                                 <th>Category</th>
                                 <th>Title</th>
                                 <th>State</th>
+                                <th>Notes</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>

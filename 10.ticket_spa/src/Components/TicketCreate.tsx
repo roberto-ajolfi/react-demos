@@ -32,7 +32,8 @@ export default class TicketCreate extends Component<any, TicketCreateState> {
       this.state.title,
       this.state.description,
       Number(this.state.priority),
-      1     // New (State)
+      1,     // New (State)
+      ''
     );
 
     service

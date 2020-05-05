@@ -6,7 +6,8 @@ export default class Ticket {
         public title: string,
         public description: string,
         public priorityId: number,
-        public stateId: number
+        public stateId: number,
+        public tenantCode: string
     ) {
     }
 }

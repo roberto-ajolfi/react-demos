@@ -1,10 +1,9 @@
 import TicketView from "../Models/TicketViewModel";
 import Ticket from "../Models/TicketModel";
+import Note from "../Models/Note";
 
-export default class TicketDataService {
-    apiURL: string = "https://localhost:44328/api/ticket";
-    //apiURL: string = "https://icticketing.azurewebsites.net/api/ticketanon";
-    //apiURL: string = "https://icticketing.azurewebsites.net/api/ticket";
+export default class NoteDataService {
+    apiURL: string = "https://localhost:44328/api/note";
     basicAuthAccount: string = process.env.REACT_APP_USERNAME + ":" + process.env.REACT_APP_PASSWORD
     basicHeaders: Headers = new Headers({
         "Authorization": "Basic " + btoa(this.basicAuthAccount),
@@ -13,9 +12,9 @@ export default class TicketDataService {
         "TenantCode": String(process.env.REACT_APP_TENANT_NAME)
     });
 
-    async getTickets() {
+    async getNotesByTicketId(ticketId: string) {
         try {
-            const promise = await fetch(this.apiURL, {
+            const promise = await fetch(this.apiURL + '?ticketId=' + ticketId, {
                 headers: this.basicHeaders
             });
             const data = await promise.json();
@@ -26,7 +25,7 @@ export default class TicketDataService {
         }
     }
 
-    async getTicketById(id: string) {
+    async getNoteById(id: string) {
         try {
             const promise = await fetch(this.apiURL + '/' + id, {
                 headers: this.basicHeaders
@@ -39,7 +38,7 @@ export default class TicketDataService {
         }
     }
 
-    async deleteTicketById(id: string) {
+    async deleteNoteById(id: string) {
         try {
             const promise = await fetch(this.apiURL + '/' + id, { 
                 method: 'DELETE',
@@ -52,32 +51,12 @@ export default class TicketDataService {
         }
     }
 
-    async createNewTicket(ticket: Ticket) {
+    async createNewNote(note: Note) {
         try {
-            // force tenant code
-            ticket.tenantCode = String(process.env.REACT_APP_TENANT_NAME);
-
             const promise = await fetch(this.apiURL, { 
                 method: 'POST',
                 headers: this.basicHeaders,
-                body: JSON.stringify(ticket)
-            });
-
-            return;
-        } catch(err) {
-            return;
-        }
-    }
-
-    async updateTicket(ticket: Ticket) {
-        try {
-            // force tenant code
-            ticket.tenantCode = String(process.env.REACT_APP_TENANT_NAME);
-            
-            const promise = await fetch(this.apiURL + '/' + ticket.id, { 
-                method: 'PUT',
-                headers: this.basicHeaders,
-                body: JSON.stringify(ticket)
+                body: JSON.stringify(note)
             });
 
             return;
