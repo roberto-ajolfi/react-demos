@@ -45,9 +45,9 @@ const FirstStepsContainer : React.FC = () => {
     <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <SimpleForm onSubmit={showResults} /> {/* message="Hello Rob!" /> */}
-          {/* <FullForm onSubmit={showResults} /> */}
-          {/* <ValidatedForm onSubmit={showResults}></ValidatedForm> */}
+          {/*<SimpleForm onSubmit={showResults} /> message="Hello Rob!" />
+          <FullForm onSubmit={showResults} /> */}
+          <ValidatedForm onSubmit={showResults}></ValidatedForm>
         </header>
       </div>
   );

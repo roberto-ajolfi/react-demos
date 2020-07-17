@@ -74,8 +74,8 @@ class TodoContainer extends Component<TodoContainerProps, TodoContainerState> {
 
 const MapStateToProps = (store: MyTypes.ReducerState) => {
     return {
-        count: store.todo.count,
-        todoList: store.todo.list
+        todoList: store.todos.todos,
+        count: store.todos.count
     };
 };
   

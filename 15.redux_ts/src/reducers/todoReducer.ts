@@ -1,36 +1,42 @@
 import * as MyTypes from "MyTypes";
 import { actionTypes } from "../actions/actions";
 import { combineReducers } from "redux";
+import { Ticket } from "../models/Ticket";
 
 interface ITodoModel {
-  count: number;
-  list: string[];
+  todos: { todos: string[], count: number };
+  tickets: Ticket[];
 }
 
 export const initialState: ITodoModel = {
-  count: 2,
-  list: ["Send Course slides", "Wash the car"]
+  todos: { todos: ["Send Course slides", "Wash the car"], count: 2 },
+  tickets: []
 };
 
-export const todoReducer = (state: ITodoModel = initialState, action: MyTypes.RootAction) => {
+export const ticketReducer = (state: Ticket[] = initialState.tickets, action: MyTypes.RootAction) => {
+  switch (action.type) {
+    case actionTypes.TICKETSLIST: {
+      return action.payload;
+    }
+    default:
+      return state;
+  }
+};
+
+export const todoReducer = (state: { todos: string[], count: number } = initialState.todos, action: MyTypes.RootAction) => {
   switch (action.type) {
     case actionTypes.ADD: {
       return {
-        ...state,
-        count: state.count + 1,
-        list: [...state.list, action.payload]
-      };
+        ...state, 
+        todos: [...state.todos, action.payload],
+        count: state.count + 1 };
     }
     case actionTypes.DELETE: {
-      const oldList = [...state.list];
+      const oldList = [...state.todos];
       oldList.splice(action.payload, 1);
       const newList = oldList;
 
-      return {
-        ...state,
-        count: state.count - 1,
-        list: newList
-      };
+      return {...state, todos: newList, count: state.count - 1 };
     }
     default:
       return state;
@@ -38,7 +44,8 @@ export const todoReducer = (state: ITodoModel = initialState, action: MyTypes.Ro
 };
 
 const rootReducer = combineReducers({
-  todo: todoReducer
+  todos: todoReducer
+  , tickets: ticketReducer
 });
 
 export default rootReducer;

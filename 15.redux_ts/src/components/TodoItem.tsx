@@ -6,11 +6,7 @@ interface TodoItemProps {
     handleDelete: (idx: number) => void;
   }
 
-export default class TodoItem extends Component<TodoItemProps, any>  {
-    constructor(props: TodoItemProps) {
-        super(props);
-    }
-    
+export default class TodoItem extends Component<TodoItemProps, any>  {   
     render() {
         return (
             <div>
