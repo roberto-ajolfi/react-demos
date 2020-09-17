@@ -9,6 +9,8 @@ import { withStyles } from '@material-ui/styles';
 import TodoHooksApp from './TodoHooks/TodoHooksApp';
 import TodoApp from './Todo/TodoApp';
 
+import HooksForm from './Components/HooksForm';
+
 const App: React.FC = (props: any) => {
   const { classes } = props;
   // const [showClassComponent, setShowClassComponent] = useState(true);
@@ -40,10 +42,16 @@ const App: React.FC = (props: any) => {
   //   </div>
   // );
 
+  // return (
+  //   <div className={classes.app}>
+  //     <TodoApp />
+  //     <TodoHooksApp />
+  //   </div>
+  // );
+
   return (
     <div className={classes.app}>
-      <TodoApp />
-      <TodoHooksApp />
+      <HooksForm />
     </div>
   );
 }

@@ -17,7 +17,7 @@ const App = () => {
         {/* <Toggle /> */}
 
         {/* <Toggle>
-          <h1>Hello everyone!</h1>
+          <h1>Toggle me!</h1>
         </Toggle> */}
 
         {/* <Toggle render={(message) => (

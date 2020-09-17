@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Picture from './models/Picture';
 import PictureListComponent from './PictureListComponent';
+import ErrorBoundary from './ErrorBoundary';
 
 const ComponentWithError: React.FC = () => { throw new Error('Broken Component') }
 
@@ -31,7 +32,9 @@ const App: React.FC = () => {
         <img src={logo} className="App-logo" alt="logo" />
         <PictureListComponent images={images}>
           <h1>Le mie Ferie a Magdeburgo 2019</h1>
-          {/* <ComponentWithError></ComponentWithError> */}
+          <ErrorBoundary>
+            <ComponentWithError></ComponentWithError>
+          </ErrorBoundary>
         </PictureListComponent>
       </header>
     </div>

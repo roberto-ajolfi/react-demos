@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, ErrorInfo } from "react";
 
 export default class ErrorBoundary extends Component<any, any> {
     constructor(props: any){
@@ -12,7 +12,7 @@ export default class ErrorBoundary extends Component<any, any> {
         return { hasError: true }
     }
 
-    componentDidCatch(error: any, info: any) {
+    componentDidCatch(error: Error, info: ErrorInfo) {
         console.log('componentDidCatch invoked.')
         console.log(error);
         console.log(info);
