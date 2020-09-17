@@ -13,6 +13,10 @@ const App: React.FC = () => {
     i18n.changeLanguage(lang);
   };
 
+  const activeLang = (language: string) => {
+    return { padding: "3px", border: language === i18n.language ?"3px solid red" : "", width: "30px" };
+  }
+
   return (
     <div className="App">
         <h1>{t('title')}</h1>
@@ -25,8 +29,8 @@ const App: React.FC = () => {
         <p className='center'>{t('alt')}</p>
         <MyComponent></MyComponent>
         <div>
-          <span><a href='#' onClick={() => changeLanguage('it')}><img width="20px" src='https://cdn.countryflags.com/thumbs/italy/flag-400.png'/></a></span>&nbsp;|&nbsp;
-          <span><a href='#' onClick={() => changeLanguage('en')}><img width="25px" src='https://cdn.webshopapp.com/shops/94414/files/54956666/the-united-kingdom-flag-icon-free-download.jpg'/></a></span>
+          <span><a style={ activeLang('it') } href='#' onClick={() => changeLanguage('it')}><img width="20px" src='https://cdn.countryflags.com/thumbs/italy/flag-400.png'/></a></span>&nbsp;|&nbsp;
+          <span><a style={ activeLang('en') } href='#' onClick={() => changeLanguage('en')}><img width="25px" src='https://cdn.webshopapp.com/shops/94414/files/54956666/the-united-kingdom-flag-icon-free-download.jpg'/></a></span>
         </div>
     </div>
   );
