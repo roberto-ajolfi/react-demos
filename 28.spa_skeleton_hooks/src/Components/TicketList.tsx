@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 
-export default class TicketList extends Component {
-  render() {
-    return (
+const TicketList = () => {
+	return (
       <div className="container">
         <div className="row">
             <div className="col-12">
@@ -46,6 +45,8 @@ export default class TicketList extends Component {
             </div>
         </div>
       </div>
-    )
-  }
+    );
+	
 }
+
+export default TicketList;
