@@ -31,4 +31,8 @@ describe('Testing the service module', ()=> {
     expect(div(6, 0)).toBe(Infinity);
   });
 
+  // test('divide by 0 raises an error', () => {
+  //   expect(() => div(13, 0)).toThrow();
+  // });
+
 });

@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 // the translations
 import translationIT from './it.json';
 import translationEN from './en.json';
+import moment from 'moment';
 
 const translations = {  
   en: { translation: translationEN },
@@ -17,6 +18,11 @@ i18n
     {
       interpolation: {
         escapeValue: false, // not needed for react!!
+        format: function(value, format, lng) {
+          if (format === 'uppercase') return value.toUpperCase();
+          if(value instanceof Date) return moment(value).format(format);
+          return value;
+        }
       },
       lng: "it",
       resources: translations,

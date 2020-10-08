@@ -3,8 +3,21 @@ import getThings from './Service';
 import { Subtract } from 'utility-types';
 
 export interface ThingsProps {
-    things: string[];
-  }
+  things: string[];
+}
+
+// implementazione di Subtract ... come dimostrazione di cosa fare in typescript
+// interface TotalProps {
+//   title: string;
+//   things: string[];
+// }
+
+// declare type SetDifference<A, B> = A extends B ? never : A;
+// declare type Subtract<T extends T1, T1 extends object> = Pick<T, SetDifference<keyof T, keyof T1>>;
+
+// type Difference = SetDifference<TotalProps, ThingsProps>;
+// type FinalType = Subtract<TotalProps, ThingsProps>;
+// const l: FinalType = { title: "Paperinik" };
 
 export default function withThings<T extends ThingsProps>(Component: React.ComponentType<T>) {
   // return class extends React.Component<Subtract<T, ThingsProps>> {

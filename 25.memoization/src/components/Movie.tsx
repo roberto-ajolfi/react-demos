@@ -25,6 +25,18 @@ export function Movie(p: { title: string, releaseDate: string, memo: boolean }) 
     }
   }
   
+  export class MovieC extends Component<{title: string, releaseDate: string}, {}> {
+    render() {
+      console.log("<MovieC> rendered");
+      return(
+        <div>
+          <div>Movie title: {this.props.title}</div>
+          <div>Release date: {this.props.releaseDate}</div>
+        </div>
+      );
+    }
+  }
+  
   export function Movies() {
     const [, setToggle] = useState(true);
     useEffect(() => {
@@ -38,6 +50,7 @@ export function Movie(p: { title: string, releaseDate: string, memo: boolean }) 
         <MemoizedMovie title="Heat" releaseDate="December 15, 1995" memo={true} />
         <Movie title="Heat" releaseDate="December 15, 1995" memo={false} />
         <PureMovie title="Heat" releaseDate="December 15, 1995" />
+		<MovieC title="Heat" releaseDate="December 15, 1995" />
       </>
     );
   }
