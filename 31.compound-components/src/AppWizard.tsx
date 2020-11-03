@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
 
-import FirstStep from './Components/Wizard/FirstStep';
-import SecondStep from './Components/Wizard/SecondStep';
 import Wizard from './Components/Wizard/Wizard';
-import Step from './Components/Wizard/Step';
+import Step, { FirstStep, SecondStep, ThirdStep } from './Components/Wizard/Steps';
 import StepList from './Components/Wizard/StepList';
 import ButtonList from './Components/Wizard/ButtonList';
-import { Previous, Next, Submit} from './Components/Wizard/Buttons';
+import { Previous, Next, Submit } from './Components/Wizard/Buttons';
+
+const submitHandler = () => {
+  alert("Completed!!!");
+}
 
 // STEP 1 - design del Compound Component
 //
@@ -17,15 +19,16 @@ function AppWizard() {
   return (
     <div className="App">
       <header className="App-header">
-        <Wizard>
-            <StepList> {/* activeStepIndex, totalSteps props */}
-                 <Step render={FirstStep} /> {/* isActive prop */}
-                <Step render={SecondStep} /> {/* isActive prop */}
+        <Wizard onSubmit={submitHandler}>
+            <StepList>
+                <Step render={FirstStep} />
+                <Step render={SecondStep} />
+                <Step render={ThirdStep} />
             </StepList>
             <ButtonList>
-                <Previous /> {/* isPreviousActive, onPreviousStep props */}
-                <Next /> {/* isNextActive, onNextStep props */}
-                <Submit /> {/* isLastStep, onSubmit props */}
+                <Previous />
+                <Next />
+                <Submit />
             </ButtonList>
         </Wizard>
       </header>

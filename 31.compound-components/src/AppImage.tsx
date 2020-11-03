@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ImageGallery from './Components/ImageGallery/ImageGallery';
+//import ImageGallery from './Components/ImageGallery/ImageGallery';
 import { ImageGalleryData } from './Components/ImageGallery/ImageGalleryData';
 import ImageGalleryWithContext from './Components/ImageGallery/ImageGalleryWithContext';
 //import ImageGalleryNoCompound from './Components/ImageGallery/ImageGalleryNoCompound';
