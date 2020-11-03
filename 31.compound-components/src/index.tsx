@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 //import App from './App';
-import AppImage from './AppImage';
+//import AppImage from './AppImage';
+import AppWizard from './AppWizard';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <AppImage />
+    {/* <AppImage /> */}
+    <AppWizard />
   </React.StrictMode>,
   document.getElementById('root')
 );
