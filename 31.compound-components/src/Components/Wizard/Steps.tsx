@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import WizardContext, { IWizardContext } from './WizardContext';
 
 interface IStepProps {
-    render: any;
+    render: JSX.Element;
+    isActive?: boolean;
 }
 
 export default class Step extends Component<IStepProps> {
@@ -10,9 +11,9 @@ export default class Step extends Component<IStepProps> {
         return (
             <WizardContext.Consumer>
                 { (ctx: IWizardContext) => {
-                    //@ts-ignore
-                    //return this.props.isActive ? (<div>{this.props.render()}</div>) : null;
-                    return (<div></div>);
+                        return this.props.isActive ? 
+                            (<div>{this.props.render}</div>) : 
+                            null;
                     }
                 } 
             </WizardContext.Consumer>

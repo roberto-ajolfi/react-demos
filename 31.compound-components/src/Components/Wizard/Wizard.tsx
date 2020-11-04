@@ -2,24 +2,41 @@ import React, { Component } from 'react';
 import WizardContext from './WizardContext';
 
 interface IWizardProps {
+    onPreviousStep?: (fromIdx: number, toIdx: number) => void;
+    onNextStep?: (fromIdx: number, toIdx: number) => void;
     onSubmit: () => void;
 }
 
 export default class Wizard extends Component<IWizardProps> {
     state = {
         totalSteps: 0,
-        activeStepIndex: 0,
+        activeStepIndex: 1,
         onNextStep: () => {
+            console.log("OnNextStep");
+            if(this.props.onNextStep !== undefined)
+                this.props.onNextStep(
+                    this.state.activeStepIndex,
+                    this.state.activeStepIndex + 1,
+                );
             this.setState({
                 activeStepIndex: this.state.activeStepIndex + 1
             });
         },
         onPreviousStep: () => {
+            console.log("OnNextStep");
+            if(this.props.onPreviousStep !== undefined)
+                this.props.onPreviousStep(
+                    this.state.activeStepIndex,
+                    this.state.activeStepIndex - 1,
+                );
             this.setState({
                 activeStepIndex: this.state.activeStepIndex - 1
             });
         },
-        onSubmit: () => this.props.onSubmit()
+        onSubmit: () => {
+            console.log("OnSubmit");
+            this.props.onSubmit();
+        }
     };
 
     componentDidMount() {
@@ -43,20 +60,20 @@ export default class Wizard extends Component<IWizardProps> {
         React.Children.forEach(
             children, 
             (child: any) => {
-                //console.log("Examining " + child.type.name);
+                console.log("Examining " + child.type.name);
                 if(child.type.name === "StepList") {
                     React.Children.forEach(child.props.children, (c: any) => {
-                        if(React.isValidElement(c))
+                        if(React.isValidElement(c)) {
+                            console.log(c);
                             totalSteps++;
+                        } else {
+                            console.log("Not an Element");
+                        }
                     });
-                    //totalSteps = child.props.children.length;
-                    //React.Children.forEach(child.props.children, (c: any) => 
-                    //    React.isValidElement(c) ? console.log(c) : console.log("Not an Element"));
-                    //console.log(child.type.name + " Found: " + totalSteps);
                 }
             });
 
-        //console.log("Total Steps: " + totalSteps);
+        console.log("Total Steps: " + totalSteps);
         this.setState({ totalSteps });
     }
 }

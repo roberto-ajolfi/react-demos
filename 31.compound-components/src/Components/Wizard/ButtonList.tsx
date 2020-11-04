@@ -8,17 +8,18 @@ export default class ButtonList extends Component {
                 {(ctx: IWizardContext) => {
                     const children = React.Children.map(
                         this.props.children, 
-                        (child: any, index: number) => {
+                        (child: any) => {
                             return React.cloneElement(child, {
-                                isPreviousActive: ctx.activeStepIndex > 0,
-                                isNextActive: ctx.activeStepIndex < ctx.totalSteps,
                                 onPreviousStep: ctx.onPreviousStep,
                                 onNextStep: ctx.onNextStep,
                                 onSubmit: ctx.onSubmit
                             });
                         });
 
-                    return (<div>{children}</div>)
+                    return (<div>
+                        <div>{ctx.activeStepIndex}/{ctx.totalSteps}</div>
+                        <div>{children}</div>
+                    </div>)
                 }}
             </WizardContext.Consumer>
         )
