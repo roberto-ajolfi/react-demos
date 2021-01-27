@@ -65,7 +65,7 @@ Questa procedura utilizza [Rollup](https://rollupjs.org/guide/en/) come module b
   - es. `npm link my-npm-package`
 - nel progetto di test posso ora importare il mio package
     - es. `import * from 'my-npm-package'`
-- la rimozione dei link così creata viene fatta con il comando 'npm unlink'
+- la rimozione dei link così creata viene fatta con il comando `npm unlink`
     - ***è importante farlo in ordine inverso rispetto a quello di attivazione***
 
 ## Pubblicazione
@@ -73,7 +73,7 @@ Questa procedura utilizza [Rollup](https://rollupjs.org/guide/en/) come module b
 ### Pubblicare su npm
 - la pubblicazione richiede di seguire le direttive del **semantic versioning**. La gestione avviene tramite il comando `npm version [patch | minor | major]`
 - eseguire il comando `npm run build` per generare il codice nella cartella `dist`
-- loggarsi ad npm tramite il comando `npm login`, specificando usernbame e password se richiesto
+- loggarsi ad npm tramite il comando `npm login`, specificando username e password se richiesto
 - **non serve utilizzare il comando `npm pack`** (che genera un file tgz con il contenuto della cartella `dist`)
 - per pubblicare utilizzare il comando  `npm publish`
     - se il package è scoped ma lo si vuole rendere pubblico, utilizzare il comando `npm publish --access public`
